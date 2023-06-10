@@ -5,7 +5,6 @@ N_DTFT = 1024;
 n = 0:1:(N-1);
 n_dtft = 0:1:(N_DTFT-1);
 
-% Hanning
 sq = ones(1, N);
 han = 0.5 - 0.5*cos(2*pi*n/(N-1));
 ham = 0.54 - 0.46*cos(2*pi*n/(N-1));
@@ -120,7 +119,7 @@ title('DTFT Beta = 5')
 load('nspeech.mat')
 sound(nspeech2, 8000);
 
-%% 
+%%
 
 % Create Custom Kaiser Filter
 wp = 1.8;
@@ -156,3 +155,24 @@ ripple = [0.05 0.005];
 b = firpm(no, fo, mo, w);
 y2 = filter(b, 1, nspeech2);
 sound(y2, 8000);
+
+%%
+
+a = fminsearch('lab4_cost', [1, 0, 0, 0, 0]);
+
+w = -pi:0.01:pi;
+Hid = abs(w) <= pi/2;
+Ha = lab4_prefilter(w, a);
+
+figure('Name', 'IIR Filter Using Numerical Optimization');
+subplot(2,2,1)
+plot(w, abs(Hid))
+title('Subplot 1: Ideal Filter')
+
+subplot(2,2,2)
+plot(w, abs(Ha))
+title('Subplot 2: Approximated Filter')
+
+subplot(2,2,3)
+plot(w, db(((abs(Ha) - abs(Hid))).^2))
+title('Subplot 3: Cost in dB')
