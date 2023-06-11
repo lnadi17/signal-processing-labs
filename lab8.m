@@ -73,3 +73,32 @@ end
 
 figure
 stem(cors);
+
+%%
+
+cors = zeros(1, 201);
+for m = -100:1:100
+    cors(m + 101) = lab8_corR(trans, received, m);
+end
+
+figure
+stem(-100:100, cors); % Visual inspection gives D = 24
+
+%%
+
+cors = zeros(1, 201);
+for m = -100:1:100
+    cors(m + 101) = lab8_corR(trans, trans, m);
+end
+
+figure
+subplot(2, 1, 1)
+stem(-100:100, cors);
+
+cors = zeros(1, 201);
+for m = -100:1:100
+    cors(m + 101) = lab8_corR(received, received, m);
+end
+
+subplot(2, 1, 2)
+stem(-100:100, cors);
