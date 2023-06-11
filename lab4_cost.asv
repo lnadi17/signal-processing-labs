@@ -1,5 +1,0 @@
-function cost = lab4_cost(alpha)
-    w = -pi:0.01:pi;
-    Hid = abs(w) <= pi/2;
-    Ha = lab
-end
