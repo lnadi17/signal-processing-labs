@@ -32,3 +32,41 @@ plot(t, F2);
 hold on;
 plot(t, (1-exp(-3.*t)).*heaviside(t));
 hold off
+
+%%
+
+t = 0:0.01:1;
+cdf = t.^3;
+pdf = 3*t.^2;
+
+figure
+subplot(3, 1, 1)
+plot(t, cdf);
+title('CDF')
+
+subplot(3, 1, 2)
+plot(t, pdf);
+title('PDF')
+
+L = 20; x0 = 0; xl = 1;
+delta = (xl - x0)/L;
+F = @(x) x.^3;
+f = zeros(1, L);
+
+x = x0:delta:xl;
+for i = 2:L+1
+    f(i) = F(x(i)) - F(x(i - 1));
+end
+
+subplot(3, 1, 3)
+hold on
+stem(f)
+
+U = rand(1, 1000);
+X = U.^(1/3);
+H = hist(X, x);
+
+stem(H/1000);
+xlim([0, L + 1])
+ylim([0, 0.2])
+legend('Theory', 'Approximation')
