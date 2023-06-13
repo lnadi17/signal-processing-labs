@@ -101,5 +101,48 @@ xlim([theta-0.02 theta+0.02])
 
 %%
 
-x = 20*real(ifft(Y)); % Had to multiply by 20 hear the sound clearly
+% Had to multiply by 20 hear the sound clearly
+x = 20*real(ifft(Y)); 
 sound(x, Fs);
+
+%%
+
+load('nspeech.mat')
+x = nspeech2; Fs = 8000;
+sound(x, Fs);
+
+%%
+
+M1 = 7; M2 = 21; M3 = 101;
+N = @(m) 2*m + 1;
+N1 = N(M1); N2 = N(M2); N3 = N(M3);
+n1 = 0:N1-1; n2 = 0:N2-1; n3 = 0:N3-1;
+
+h1 = 2/pi*sinc(2/pi*(n1 - (N1-1)/2));
+h2 = 2/pi*sinc(2/pi*(n2 - (N2-1)/2));
+h3 = 2/pi*sinc(2/pi*(n3 - (N3-1)/2));
+
+figure
+hold on
+plot(abs(DTFT(h1, 1024)));
+plot(abs(DTFT(h2, 1024)));
+plot(abs(DTFT(h3, 1024)));
+xlim([0 1024]);
+
+%%
+
+y1 = conv(h1, x);
+y2 = conv(h2, x);
+y3 = conv(h3, x);
+
+%%
+
+sound(10*y1, Fs);
+
+%%
+
+sound(10*y2, Fs);
+
+%%
+
+sound(10*y3, Fs);
