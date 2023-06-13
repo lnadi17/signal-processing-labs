@@ -4,10 +4,8 @@ These are MATLAB files which were created for the Signal Processing course in th
 These scripts are intended to aid in learning various signal processing algorithms and techniques.
 
 Folder `lab-guides` has PDF versions for each laboratory work in a great detail. Those guides were used to create 
-`labX.m` files which implement different algorithms for the learning purposes.
-
-Some of these scripts rely on helper files, which are in `helper-files` folder. Be sure to add this folder to MATLAB path as well as the repository folder itself.
- It can be done through `Home Tab -> Environment -> Set Path -> Add Folder` dialog.
+`labX.m` files which implement different algorithms for the learning purposes. Some of these scripts rely on helper files, which are in `helper-files` folder. Be sure to add this folder to MATLAB path as well as the repository folder itself. It can be done through `Home Tab -> Environment -> Set Path -> Add Folder` dialog. If you want to use `pezdemo.m` for lab 3, 
+you must add its folder to the MATLAB path too.
  
  Here is the title of each lab work:
  1. Discrete Time Systems
