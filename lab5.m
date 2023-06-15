@@ -89,16 +89,16 @@ x4 = cos(2*pi*n/10);
 figure
 subplot(2, 2, 1);
 stem(n, abs(lab5_DFTsum(x1)));
-xlim([0 9]); ylim([0 1]);
+xlim([0 9]);
 subplot(2, 2, 2);
 stem(n, abs(lab5_DFTsum(x2)));
-xlim([0 9]); ylim([0 1]);
+xlim([0 9]);
 subplot(2, 2, 3);
 stem(n, abs(lab5_DFTsum(x3)));
-xlim([0 9]); ylim([0 1]);
+xlim([0 9]);
 subplot(2, 2, 4);
 stem(n, abs(lab5_DFTsum(x4)));
-xlim([0 9]); ylim([0 1]);
+xlim([0 9]);
 
 %%
 
@@ -122,4 +122,55 @@ xlim([0 9]);
 
 %%
 
+% Implement DFT using matrix multiplication
+figure
+subplot(2, 2, 1);
+A = lab5_DFTmatrix(N);
+stem(n, abs(A*x1'));
+xlim([0 9]);
+subplot(2, 2, 2);
+stem(n, abs(A*x2'));
+xlim([0 9]);
+subplot(2, 2, 3);
+stem(n, abs(A*x3'));
+xlim([0 9]);
+subplot(2, 2, 4);
+stem(n, abs(A*x4'));
+xlim([0 9]);
 
+%%
+
+B = inv(A);
+figure
+subplot(2, 2, 1);
+stem(n, real(A/B*x1'));
+xlim([0 9]);
+subplot(2, 2, 2);
+stem(n, real(A/B*x2'));
+xlim([0 9]);
+subplot(2, 2, 3);
+hold on
+stem(n, real(A/B*x3'));
+stem(n, imag(A/B*x3'));
+legend('Real', 'Imag');
+xlim([0 9]);
+subplot(2, 2, 4);
+stem(n, real(A/B*x4'));
+xlim([0 9]);
+
+%%
+
+N = 2048;
+n = 0:N-1;
+x = cos(2*pi*n/10);
+A = lab5_DFTmatrix(N);
+
+t = cputime;
+X = lab5_DFTsum(x);
+time1 = cputime - t;
+
+t = cputime;
+X = A*x';
+time2 = cputime - t;
+
+disp(time1); disp(time2);
