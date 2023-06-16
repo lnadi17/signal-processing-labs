@@ -1,6 +1,6 @@
 function X = lab6_FFT8(x)
-    x1 = x(1:2:7); % even
-    x2 = x(2:2:8); % odd
+    x1 = x(1:2:7); % Even
+    x2 = x(2:2:8); % Odd
     X1 = lab6_FFT4(x1);
     X2 = lab6_FFT4(x2);
     X = zeros(1, 8);
