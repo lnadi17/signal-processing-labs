@@ -33,8 +33,8 @@ disp(p);
 %%
 
 % Calculate notch filter poles and zeros for theta = pi/4 and r = 0.95
-r = roots(poly([exp(1j*pi/4) exp(-1j*pi/4)]));
-p = roots(poly([0.95*exp(1j*pi/4) 0.95*exp(-1j*pi/4)]));
+r = [exp(1j*pi/4) exp(-1j*pi/4)];
+p = [0.95*exp(1j*pi/4) 0.95*exp(-1j*pi/4)];
 disp(r);
 disp(p);
 % Now use these roots and poles in pezdemo
@@ -67,7 +67,7 @@ fvtool(tf2sos(b, a));
 %%
 
 % Start creating musical note detector
-[x, Fs] = audioread('Note08.wav');
+[x, Fs] = audioread('Note09.wav');
 sound(x, Fs);
 pspectrum(x, Fs);
 
